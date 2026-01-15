@@ -5,17 +5,13 @@ from keras.models import load_model
 import matplotlib.pyplot as plt
 import yfinance as yf
 
-# command to run: streamlit run web_bit_coin_price_predictor.py
-
 st.title("BTC Price Prediction App")
-
-stock = "BTC-USD"
 
 from datetime import datetime
 end = datetime.now()
 start = datetime(end.year-10,end.month,end.day)
 
-bit_coin_data = yf.download(stock, start, end)
+bit_coin_data = yf.download("BTC-USD", start, end)
 bit_coin_data.columns = bit_coin_data.columns.get_level_values(0)
 
 model = load_model("Latest_bit_coin_model.keras")
@@ -109,5 +105,5 @@ plt.ylabel('Close Price')
 
 plt.xticks(range(no_of_days))
 plt.yticks(range(min(list(map(int, future_results))), max(list(map(int, future_results))), no_of_days * 100))
-plt.title('Closing Price of ' + stock + ' for next ' + str(no_of_days) + ' days')
+plt.title('Closing Price of BTC-USD for next ' + str(no_of_days) + ' days')
 st.pyplot(fig)
