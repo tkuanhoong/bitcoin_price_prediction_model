@@ -26,8 +26,8 @@ A deep learning-based web application that predicts Bitcoin (BTC) prices using a
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-link>
-   cd <repo-name>
+   git clone [<your-repo-link>](https://github.com/tkuanhoong/bitcoin_price_prediction_model.git)
+   cd bitcoin_price_prediction_model
    ```
 2. **Set Up a Virtual Environment (Recommended)**
 
