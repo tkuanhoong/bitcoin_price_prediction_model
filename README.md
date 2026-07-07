@@ -17,7 +17,7 @@ A deep learning-based web application that predicts Bitcoin (BTC) prices using a
 
 ## 📂 Project Structure
 
-- `web_bit_coin_price_predictor.py`: The main script to launch the Streamlit web app.
+- `web_bitcoin_price_predictor.py`: The main script to launch the Streamlit web app.
 - `bit_coin.ipynb`: Jupyter Notebook containing the initial data analysis and model training logic.
 - `Latest_bit_coin_model.keras`: The pre-trained Keras model file.
 - `requirements.txt`: Configuration file containing all necessary Python libraries.
