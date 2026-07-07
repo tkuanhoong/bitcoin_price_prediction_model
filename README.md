@@ -53,6 +53,6 @@ A deep learning-based web application that predicts Bitcoin (BTC) prices using a
 
 4. **Run & Start the interactive web dashboard**
    ```bash
-   streamlit run web_bit_coin_price_predictor.py
+   streamlit run web_bitcoin_price_predictor.py
    ```
    Once running, the app will be accessible at: http://localhost:8501

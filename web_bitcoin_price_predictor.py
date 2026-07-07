@@ -4,6 +4,7 @@ import numpy as np
 from keras.models import load_model
 import matplotlib.pyplot as plt
 import yfinance as yf
+from matplotlib.ticker import ScalarFormatter
 
 st.title("BTC Price Prediction App")
 
@@ -27,10 +28,10 @@ fig = plt.figure(figsize=figsize)
 plt.plot(bit_coin_data.Close,'b')
 st.pyplot(fig)
 
-st.subheader("Test Close Price")
+st.subheader("Test Close Price (Year-over-Year)")
 st.write(x_test)
 
-st.subheader('Test Close Price Chart')
+st.subheader('Test Close Price Chart (Year-over-Year)')
 figsize = (15,6)
 fig = plt.figure(figsize=figsize)
 plt.plot(x_test,'b')
@@ -92,7 +93,7 @@ def predict_future(no_of_days, prev_100):
         
     return future_predictions
 
-no_of_days = int(st.text_input("Enter the No of days to be predicted from current date : ","10"))
+no_of_days = st.number_input("Enter the nuymbers of days to be predicted from current date: (MAX: 30) ",7, 30, 7)
 future_results = predict_future(no_of_days,last_100)
 future_results = np.array(future_results).reshape(-1,1)
 
@@ -103,7 +104,13 @@ for i in range(len(future_results)):
 plt.xlabel('days')
 plt.ylabel('Close Price')
 
-plt.xticks(range(no_of_days))
-plt.yticks(range(min(list(map(int, future_results))), max(list(map(int, future_results))), no_of_days * 100))
-plt.title('Closing Price of BTC-USD for next ' + str(no_of_days) + ' days')
+# GENERATE CUSTOM LABELS: ['Day 1', 'Day 2', 'Day 3', ...]
+day_labels = [f'Day {i+1}' for i in range(no_of_days)]
+plt.xticks(range(no_of_days), day_labels)
+
+ax = plt.gca()
+ax.yaxis.set_major_formatter(ScalarFormatter())
+ax.ticklabel_format(style='plain', axis='y')
+
+plt.title(f'Closing Price of BTC-USD for next {no_of_days} days')
 st.pyplot(fig)
