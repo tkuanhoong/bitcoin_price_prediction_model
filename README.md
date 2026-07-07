@@ -22,6 +22,10 @@ A deep learning-based web application that predicts Bitcoin (BTC) prices using a
 - `Latest_bit_coin_model.keras`: The pre-trained Keras model file.
 - `requirements.txt`: Configuration file containing all necessary Python libraries.
 
+## Live Demo
+
+Click [Here](https://btc-prediction-model.streamlit.app/) For Quick Live Demo.
+
 ## Installation & Setup
 
 1. **Clone the repository:**

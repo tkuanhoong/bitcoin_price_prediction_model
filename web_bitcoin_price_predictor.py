@@ -73,7 +73,7 @@ fig = plt.figure(figsize=(15,6))
 plt.plot()
 
 plt.plot(pd.concat([bit_coin_data.Close[:splitting_len+100],ploting_data], axis=0))
-plt.legend(["Data- not used", "Original Test data", "Predicted Test data"])
+plt.legend(["Data - Not used", "Original Test data", "Predicted Test data"])
 st.pyplot(fig)
 
 st.subheader("Future Price values")
@@ -107,16 +107,21 @@ for i in range(len(future_results)):
     y_val = float(future_results[i][0])
     plt.text(i, y_val, f"{int(y_val)}")
     
-plt.xlabel('days')
-plt.ylabel('Close Price')
+plt.xlabel('Days')
+plt.ylabel('Close Price (USD)')
 
 # GENERATE CUSTOM LABELS: ['Day 1', 'Day 2', 'Day 3', ...]
-day_labels = [f'Day {i+1}' for i in range(no_of_days)]
+day_labels = [f'D-{i+1}' for i in range(no_of_days)]
 plt.xticks(range(no_of_days), day_labels)
 
 ax = plt.gca()
 ax.yaxis.set_major_formatter(ScalarFormatter())
 ax.ticklabel_format(style='plain', axis='y')
 
-plt.title(f'Closing Price of BTC-USD for next {no_of_days} days')
+plt.title(f'Predicted Closing Price of BTC-USD for next {no_of_days} days')
 st.pyplot(fig)
+
+st.subheader("Summary")
+st.write("- An **upward** trend may suggest that Bitcoin is likely to continue **rising**.")
+st.write("- A **downward** trend may indicate that Bitcoin is likely to continue **falling**.")
+st.write("- However, no trend guarantees future price movements.")
