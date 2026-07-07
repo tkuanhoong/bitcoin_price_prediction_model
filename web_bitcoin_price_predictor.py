@@ -17,7 +17,7 @@ bit_coin_data = yf.download("BTC-USD", start, end)
 bit_coin_data.columns = bit_coin_data.columns.get_level_values(0)
 
 model = load_model("Latest_bit_coin_model.keras")
-st.subheader("Bitcoin Dataset")
+st.subheader("Bitcoin Dataset (BTC-USD)")
 st.write(bit_coin_data)
 
 splitting_len = int(len(bit_coin_data)*0.9)
@@ -83,14 +83,16 @@ last_100 = bit_coin_data[['Close']].tail(100)
 last_100 = scaler.fit_transform(last_100['Close'].values.reshape(-1,1)).reshape(1,-1,1)
 
 def predict_future(no_of_days, prev_100):
-    
     future_predictions = []
-    for i in range(no_of_days):
-        next_day = model.predict(prev_100).tolist()
-        prev_100_list = prev_100[0].tolist()  # convert numpy array to list
-        prev_100_list.append(next_day[0])  # append the prediction
-        prev_100 = np.array([prev_100_list[1:]])  # convert list back to numpy array
+    current_window = prev_100.copy()
+    
+    for _ in range(no_of_days):
+        # next_day shape is likely (1, 1)
+        next_day = model.predict(current_window)
         future_predictions.append(scaler.inverse_transform(next_day))
+        
+        # Append the prediction and slice out the first element to slide the window
+        current_window = np.append(current_window[:, 1:, :], [next_day], axis=1)
         
     return future_predictions
 
@@ -100,8 +102,11 @@ future_results = np.array(future_results).reshape(-1,1)
 
 fig = plt.figure(figsize=(15, 6))
 plt.plot(pd.DataFrame(future_results), marker = 'o')
+
 for i in range(len(future_results)):
-    plt.text(i, future_results[i], int(future_results[i][0]))
+    y_val = float(future_results[i][0])
+    plt.text(i, y_val, f"{int(y_val)}")
+    
 plt.xlabel('days')
 plt.ylabel('Close Price')
 
