@@ -37,7 +37,7 @@ A deep learning-based web application that predicts Bitcoin (BTC) prices using a
    ```
 - Activate (Windows)
   ```bash
-  venv\Scripts\activate
+  venv/Scripts/activate
   ```
 
 - Activate (Mac/Linux)

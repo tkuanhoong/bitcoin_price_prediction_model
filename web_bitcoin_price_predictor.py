@@ -1,3 +1,4 @@
+# Run: streamlit run web_bitcoin_price_predictor.py
 import yfinance as yf
 import streamlit as st
 import pandas as pd
